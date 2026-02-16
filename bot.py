@@ -9,6 +9,7 @@ import random
 import string
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # 👈 ДОБАВЛЕНО
 import threading
 
 # ========== НАСТРОЙКИ ==========
@@ -94,6 +95,7 @@ def format_time_left(expires_str):
 
 # ========== ВЕБ-СЕРВЕР ДЛЯ ROBLOX ==========
 app = Flask(__name__)
+CORS(app)  # 👈 РАЗРЕШАЕТ ЗАПРОСЫ ИЗ ROBLOX
 
 @app.route('/verify', methods=['POST'])
 def verify():
