@@ -139,8 +139,8 @@ def check():
             return jsonify({"status": "inactive", "message": "Expired"})
         return jsonify({"status": "active"})
     return jsonify({"status": "inactive"})
-    
-    @app.route('/ping', methods=['GET'])
+
+@app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({
         "status": "alive",
@@ -513,5 +513,4 @@ async def on_ready():
 
 # ========== ЗАПУСК ==========
 if __name__ == "__main__":
-
     bot.run(TOKEN)
