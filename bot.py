@@ -139,6 +139,14 @@ def check():
             return jsonify({"status": "inactive", "message": "Expired"})
         return jsonify({"status": "active"})
     return jsonify({"status": "inactive"})
+    
+    @app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({
+        "status": "alive",
+        "time": str(datetime.now()),
+        "message": "Server is running"
+    })
 
 def run_flask():
     port = int(os.environ.get("PORT", 5000))
@@ -505,4 +513,5 @@ async def on_ready():
 
 # ========== ЗАПУСК ==========
 if __name__ == "__main__":
+
     bot.run(TOKEN)
