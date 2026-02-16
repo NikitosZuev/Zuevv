@@ -20,14 +20,22 @@ local function verifyKey(key, hwid)
     local url = "https://zuevv.onrender.com/verify"
     local data = game:GetService("HttpService"):JSONEncode({key = key, hwid = hwid})
     
+    -- Добавляем таймаут 60 секунд
     local success, response = pcall(function()
-        return game:GetService("HttpService"):PostAsync(url, data, Enum.HttpContentType.ApplicationJson)
+        return game:GetService("HttpService"):PostAsync(
+            url, 
+            data, 
+            Enum.HttpContentType.ApplicationJson, 
+            false,  -- не кэшировать
+            nil,    -- без доп. заголовков
+            60      -- 👈 ТАЙМАУТ 60 СЕКУНД
+        )
     end)
     
     if success then
         return game:GetService("HttpService"):JSONDecode(response)
     else
-        return {status = "error", message = "Connection failed"}
+        return {status = "error", message = "Сервер запускается (30-60 сек), попробуй ещё раз"}
     end
 end
 
